@@ -1,9 +1,7 @@
 """GraphQL Tools init"""
 import logging
-from graphql import GraphQLSchema, DocumentNode
+from graphql import DocumentNode
 from graphql.graphql import parse
-
-from lib.func_tools import function_will_exit_failure
 from lib.gql_helpers import (
     get_gql_definition_root_query_name,
     get_gql_definition_arguments,
@@ -14,14 +12,6 @@ from models.graphql_mock_schema import GQLMockQuerySchema
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
-
-
-def mock_gql_schema(schema: GraphQLSchema):
-    """Mocks given GQL Schema"""
-    if schema is None:
-        function_will_exit_failure("Invalid GQL schema", logger)
-    if isinstance(schema, GraphQLSchema):
-        function_will_exit_failure("GQL schema is not of type GraphQLSchema", logger)
 
 
 def parse_gql_query(query: str) -> DocumentNode:
