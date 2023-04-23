@@ -2,8 +2,6 @@
 from pydantic import BaseModel as PydanticBaseModel
 from typing import List, Optional
 
-from graphql import GraphQLArgument
-
 
 class BaseModel(PydanticBaseModel):
     class Config:
@@ -15,5 +13,5 @@ class GQLMockQuerySchema(BaseModel):
 
     rootFieldName: Optional[str]
     rootFields: List[str]
-    arguments: Optional[List[GraphQLArgument]]
+    arguments: Optional[tuple]
     children: Optional[List[str]]
