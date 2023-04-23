@@ -1,0 +1,24 @@
+name: Test Library PR
+
+on:
+  pull_request:
+    types: [edited, opened, synchronize, reopened]
+    branches: [master]
+
+jobs:
+  image_build_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+          cache: 'pip' # caching pip dependencies
+
+      - name: Install Project Dependencies
+        run: poetry install
+
+      - name: Test PR
+        run: pytest
