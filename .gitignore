@@ -4,3 +4,4 @@ dist
 poetry.lock
 .coverage
 reports
+htmlcov

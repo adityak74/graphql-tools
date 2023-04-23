@@ -10,6 +10,7 @@ from graphql import (
 )
 from graphql_tools import GQLMockQuerySchema, parse_gql_query, generate_gql_mock
 from graphql_tools.types import GQLMockArgument
+from graphql_tools.exceptions import GQLInvalidTypeException
 
 HELLO_QUERY = """
 query GetHelloQuery {
@@ -98,3 +99,9 @@ def test_gql_schema_validation_with_args_int():
     assert gql_generated_mock.rootFieldName == gql_mock_schema.rootFieldName
     assert gql_generated_mock.rootFields == gql_mock_schema.rootFields
     assert gql_generated_mock.arguments == gql_mock_schema.arguments
+
+
+def test_gql_mock_argument_name_type_fail():
+    """Test GQL Mock argument for name type fail"""
+    with pytest.raises(GQLInvalidTypeException):
+        GQLMockArgument(name=None).to_gql()
