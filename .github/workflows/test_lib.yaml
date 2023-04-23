@@ -3,7 +3,7 @@ name: Test Library PR
 on:
   pull_request:
     types: [edited, opened, synchronize, reopened]
-    branches: [master]
+    branches: [main]
 
 jobs:
   image_build_and_test:
