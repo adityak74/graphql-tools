@@ -2,3 +2,5 @@ venv
 dist
 .idea
 poetry.lock
+.coverage
+reports
