@@ -17,6 +17,9 @@ jobs:
           python-version: 3.11
           cache: 'pip' # caching pip dependencies
 
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+
       - name: Install Project Dependencies
         run: poetry install
 
