@@ -15,7 +15,7 @@ query GetHelloQuery {
 """
 ```
 
-#### Code:
+#### Code
 
 ```
 from graphql_tools import GQLMockQuerySchema, parse_gql_query, generate_gql_mock
