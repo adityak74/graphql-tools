@@ -43,4 +43,4 @@ jobs:
       - name: Test PR
         run: |
           source .venv/bin/activate
-          pytest
+          make test
