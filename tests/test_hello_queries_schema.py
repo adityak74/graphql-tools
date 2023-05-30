@@ -84,7 +84,7 @@ def test_gql_schema_validation_fail_syntax_error():
         parse_gql_query(query=HELLO_QUERY_SYNTAX_ERROR)
 
 
-def test_gql_schema_validation_with_args_int():
+def test_gql_schema_validation_with_args_int(benchmark):
     """Test GQL Schema Validation with args for int"""
     parsed_query = parse_gql_query(query=HELLO_QUERY_INT_VALUE)
     assert isinstance(parsed_query, DocumentNode) is True
@@ -105,3 +105,9 @@ def test_gql_mock_argument_name_type_fail():
     """Test GQL Mock argument for name type fail"""
     with pytest.raises(GQLInvalidTypeException):
         GQLMockArgument(name=None).to_gql()
+
+
+def test_gql_schema_validation_with_args_int_benchmark(benchmark):
+    parsed_query = parse_gql_query(query=HELLO_QUERY_INT_VALUE)
+    """Test GQL Schema Validation with args for int benchmark"""
+    benchmark(generate_gql_mock, parsed_query)
