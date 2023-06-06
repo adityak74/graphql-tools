@@ -2,12 +2,12 @@
 import logging
 from graphql import DocumentNode
 from graphql.graphql import parse
-from lib.gql_helpers import (
+from graphql_tools.lib.gql_helpers import (
     get_gql_definition_root_query_name,
     get_gql_definition_arguments,
     get_gql_definition_base_fields,
 )
-from models.graphql_mock_schema import GQLMockQuerySchema
+from graphql_tools.models.graphql_mock_schema import GQLMockQuerySchema
 
 
 logging.basicConfig(level=logging.DEBUG)
