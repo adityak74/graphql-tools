@@ -1,5 +1,5 @@
 """GQL Mock Schema Types"""
-from lib.utilities import get_gql_type_node_from_value
+from graphql_tools.lib.utilities import get_gql_type_node_from_value
 from graphql import NameNode, VariableNode, ArgumentNode
 from graphql_tools.exceptions import GQLInvalidTypeException
 
