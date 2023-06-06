@@ -1,4 +1,4 @@
-# GraphQL Tools Python
+# GraphQL Tools
 
 This library provides interface for GQL Schema mocking and validating functionality. Validating GraphQL queries for
 their correct schema is essential for synchronous development of GQL backend and front end.
