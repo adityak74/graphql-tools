@@ -10,7 +10,7 @@ packages = [{include = "graphql_tools"}]
 [tool.poetry.dependencies]
 python = "^3.11"
 graphql-core = "^3.2.3"
-faker = "^18.3.1"
+faker = "^19.0.0"
 pydantic = "^1.10.7"
 black = "^23.1.0"
 pytest = "^7.2.2"
