@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 jobs:
   build-n-publish:
@@ -24,39 +26,49 @@ jobs:
           virtualenvs-in-project: true
           installer-parallel: true
 
-      #----------------------------------------------
-      #       load cached venv if cache exists
-      #----------------------------------------------
       - name: Load cached venv
         id: cached-poetry-dependencies
         uses: actions/cache@v4
         with:
           path: .venv
           key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
-      #----------------------------------------------
-      # install dependencies if cache does not exist
-      #----------------------------------------------
+
       - name: Install dependencies
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
         run: poetry install --no-interaction --no-root
 
       - name: Activate Virtual Environment
-        run: |
-          source .venv/bin/activate
+        run: source .venv/bin/activate
 
       - name: Install pypa/build
-        run: >-
-          python3 -m
-          pip install
-          build
+        run: python3 -m pip install build
+
       - name: Build a binary wheel and a source tarball
-        run: >-
-          python3 -m
-          build
-          --sdist
-          --wheel
-          --outdir dist/
-          .
+        run: python3 -m build --sdist --wheel --outdir dist/ .
+
+      - name: Determine version increment
+        id: bumpversion
+        run: |
+          title=$(jq --raw-output .pull_request.title "$GITHUB_EVENT_PATH")
+          if [[ $title =~ ^.*(major|minor|patch).*$ ]]; then
+            echo "::set-output name=version::${BASH_REMATCH[1]}"
+          else
+            echo "No version increment specified in PR title. Defaulting to 'patch'."
+            echo "::set-output name=version::patch"
+          fi
+
+      - name: Bump version
+        if: github.event_name == 'pull_request'
+        run: |
+          version=$(echo "${{ steps.bumpversion.outputs.version }}" | tr '[:lower:]' '[:upper:]')
+          if [[ $version == "MAJOR" ]]; then
+            bumpversion major
+          elif [[ $version == "MINOR" ]]; then
+            bumpversion minor
+          else
+            bumpversion patch
+          fi
+
       - name: Publish distribution 📦 to Test PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
