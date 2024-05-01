@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    types: [opened, synchronize, reopened]
 
 jobs:
   build-n-publish:
@@ -56,11 +54,11 @@ jobs:
         run: |
           version=$(echo "${{ steps.bumpversion.outputs.version }}" | tr '[:lower:]' '[:upper:]')
           if [[ $version == "MAJOR" ]]; then
-            bumpversion major
+            bump2version major
           elif [[ $version == "MINOR" ]]; then
-            bumpversion minor
+            bump2version minor
           else
-            bumpversion patch
+            bump2version patch
           fi
 
       - name: Push changes to main
