@@ -14,5 +14,5 @@ class GQLMockQuerySchema(BaseModel):
 
     rootFieldName: Optional[str]
     rootFields: List[str]
-    arguments: Optional[tuple]
-    children: Optional[List[str]]
+    arguments: Optional[tuple] = None
+    children: Optional[List[str]] = None
