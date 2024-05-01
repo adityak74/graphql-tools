@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "graphql-tools"
-version = "0.1.2-dev0"
+version = "0.1.3-dev0"
 description = "GraphQL Tools written in Python"
 authors = ["Aditya Karnam <akarnam37@gmail.com>"]
 license = "MIT"
