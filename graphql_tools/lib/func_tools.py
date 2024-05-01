@@ -1,4 +1,5 @@
 """Function tools"""
+
 import sys
 from logging import Logger
 

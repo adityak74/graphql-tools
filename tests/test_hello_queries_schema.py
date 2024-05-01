@@ -1,4 +1,5 @@
 """Test Hello Query Schema"""
+
 import pytest
 from graphql import (
     GraphQLSchema,
@@ -68,9 +69,7 @@ def test_gql_schema_validation_with_args():
     gql_mock_schema = GQLMockQuerySchema(
         rootFieldName="GetHelloQueryWithArgs",
         rootFields=["hello"],
-        arguments=(
-            GQLMockArgument(name="world", variable_name="hello").to_gql(),
-        ),
+        arguments=(GQLMockArgument(name="world", variable_name="hello").to_gql(),),
     )
     gql_generated_mock = generate_gql_mock(parsed_query)
     assert gql_generated_mock.rootFieldName == gql_mock_schema.rootFieldName
@@ -84,16 +83,14 @@ def test_gql_schema_validation_fail_syntax_error():
         parse_gql_query(query=HELLO_QUERY_SYNTAX_ERROR)
 
 
-def test_gql_schema_validation_with_args_int(benchmark):
+def test_gql_schema_validation_with_args_int():
     """Test GQL Schema Validation with args for int"""
     parsed_query = parse_gql_query(query=HELLO_QUERY_INT_VALUE)
     assert isinstance(parsed_query, DocumentNode) is True
     gql_mock_schema = GQLMockQuerySchema(
         rootFieldName="GetHelloQueryWithInt",
         rootFields=["hello"],
-        arguments=(
-            GQLMockArgument(name="world", value=1).to_gql(),
-        ),
+        arguments=(GQLMockArgument(name="world", value=1).to_gql(),),
     )
     gql_generated_mock = generate_gql_mock(parsed_query)
     assert gql_generated_mock.rootFieldName == gql_mock_schema.rootFieldName

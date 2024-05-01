@@ -1,4 +1,5 @@
 """GQL Mock schema model"""
+
 from pydantic import BaseModel as PydanticBaseModel
 from typing import List, Optional
 

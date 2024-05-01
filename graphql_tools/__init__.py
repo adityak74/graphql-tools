@@ -1,4 +1,5 @@
 """GraphQL Tools init"""
+
 import logging
 from graphql import DocumentNode
 from graphql.graphql import parse
